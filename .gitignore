@@ -7,6 +7,13 @@
 # Only exists if Bazel was run
 /bazel-out
 
+# Files of ADMIN-PRO Template 
+/src/assets/css
+/src/assets/js
+/src/assets/plugins
+/src/assets/scss
+/src/assets/images
+
 # dependencies
 /node_modules
 
