@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 
 import { LoginForm } from '../interfaces/login-form.interface';
 import { RegisterForm } from '../interfaces/register-form.interface';
-
+import { User} from '../models/user.model'
 
 const base_url = environment.base_url;
 
@@ -19,8 +19,11 @@ const base_url = environment.base_url;
 
 export class UserService {
 
+  public user!: User; 
+
   constructor( private http: HttpClient,
-               private router: Router) { }
+               private router: Router,
+               ) { }
 
   logout(){
     localStorage.removeItem('token');
@@ -35,10 +38,17 @@ export class UserService {
       }
     }).pipe(
       tap( (resp: any) => {
+        console.log(resp);
+        
+        const {email, googleLogin, img, lastName, name, rol, uid} = resp.userDB
+        this.user = new User(googleLogin,name,lastName, email, img,rol,uid);
         localStorage.setItem('token', resp.token);
       }),
       map( resp => true),
-      catchError( error => of(false))
+      catchError( error => {
+        console.log(error);
+        return of(false);
+      })
     );
   }
 
