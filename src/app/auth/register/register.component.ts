@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 
 
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -29,7 +30,8 @@ export class RegisterComponent   {
   });
 
   constructor(private fb: FormBuilder,
-              private userService: UserService) { }
+              private userService: UserService,
+              private router:Router) { }
 
   createUser(){
     this.formSubmitted= true;
@@ -42,8 +44,7 @@ export class RegisterComponent   {
     // We have all the information about the user
     this.userService.createUser( this.registerForm.value)
         .subscribe( resp => {
-          console.log(resp);
-          console.log('User created')
+          this.router.navigateByUrl('/')
         },(err) => {
           // if an error
           Swal.fire('Error', err.error.msg,'error');
