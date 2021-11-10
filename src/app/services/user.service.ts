@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 
 import { LoginForm } from '../interfaces/login-form.interface';
 import { RegisterForm } from '../interfaces/register-form.interface';
+import { UpdateUserProfileForm } from '../interfaces/update-user-profile-form.interface';
 import { User} from '../models/user.model'
 
 const base_url = environment.base_url;
@@ -25,26 +26,32 @@ export class UserService {
                private router: Router,
                ) { }
 
+  get token():string{
+    return localStorage.getItem('token') || '';
+  }
+
+  get uid():string{
+    return this.user.uid || ""
+  }
+
   logout(){
     localStorage.removeItem('token');
     this.router.navigateByUrl('/login');
   }
 
   validateToken(): Observable<boolean>{
-    const token = localStorage.getItem('token') || '';
+    
     return this.http.get(`${base_url}/login/renew`, {
       headers: {
-        'x-token': token
+        'x-token': this.token
       }
     }).pipe(
-      tap( (resp: any) => {
-        console.log(resp);
-        
-        const {email, googleLogin, img, lastName, name, rol, uid} = resp.userDB
+      map( (resp: any) => {
+        const {email, googleLogin, img ='', lastName, name, rol, uid} = resp.userDB
         this.user = new User(googleLogin,name,lastName, email, img,rol,uid);
         localStorage.setItem('token', resp.token);
+        return true
       }),
-      map( resp => true),
       catchError( error => {
         console.log(error);
         return of(false);
@@ -61,6 +68,7 @@ export class UserService {
                 );
   }
 
+  
   login ( formData: LoginForm){
     return this.http.post(`${base_url}/login`, formData)
                .pipe(
@@ -68,5 +76,13 @@ export class UserService {
                    localStorage.setItem('token', resp.token);
                  })
                );
+  }
+
+  updateUserProfile( formData: UpdateUserProfileForm){
+    return this.http.put(`${base_url}/users/${this.uid}`, formData, {
+      headers: {
+        'x-token': this.token
+      }
+    });
   }
 }
