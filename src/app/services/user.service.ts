@@ -6,10 +6,12 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 
+
 import { LoginForm } from '../interfaces/login-form.interface';
 import { RegisterForm } from '../interfaces/register-form.interface';
 import { UpdateUserProfileForm } from '../interfaces/update-user-profile-form.interface';
 import { User} from '../models/user.model'
+import { LoadUsers } from '../interfaces/load-users.interface';
 
 const base_url = environment.base_url;
 
@@ -32,6 +34,14 @@ export class UserService {
 
   get uid():string{
     return this.user.uid || ""
+  }
+
+  get headers(){
+    return {
+      headers:{
+        'x-token': this.token
+      }
+    }
   }
 
   logout(){
@@ -84,5 +94,11 @@ export class UserService {
         'x-token': this.token
       }
     });
+  }
+
+  loadUsers( from: number = 0){
+    
+    const url = `${base_url}/users?from=${from}`
+    return this.http.get<LoadUsers>(url, this.headers);
   }
 }

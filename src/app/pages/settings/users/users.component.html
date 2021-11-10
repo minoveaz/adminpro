@@ -1,0 +1,118 @@
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input type="text"
+                        class="form-control"
+                        placeholder="Search user.."/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Loading</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-o">Please Wait</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Contact  list</h4>
+                <h6 class="card-subtitle">Total Users ({{totalUsers}})</h6>
+                <div class="table-responsive">
+                    <div id="add-contact" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h4 class="modal-title" id="myModalLabel">Add New Contact</h4> </div>
+                                            <div class="modal-body">
+                                                <div class="form-horizontal form-material">
+                                                    <div class="form-group">
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Type name"> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Email"> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Phone"> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Designation"> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Age"> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Date of joining"> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <input type="text" class="form-control" placeholder="Salary"> </div>
+                                                        <div class="col-md-12 m-b-20">
+                                                            <div class="fileupload btn btn-danger btn-rounded waves-effect waves-light"><span><i class="ion-upload m-r-5"></i>Upload Contact Image</span>
+                                                                <input type="file" class="upload"> </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Save</button>
+                                                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                    </div>
+                    
+                    <!-- List Table -->
+
+                    <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list footable-loaded footable" data-page-size="10">
+                        <thead>
+                            <tr>
+                                <th class="w100">Avatar</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Role</th>
+                                <th class="text-nowrap w100">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users; let i= index " class="footable-even" style="">
+                                <td>
+                                    <img [src]="user.imagenUrl" alt="user" width="40" class="img-circle"> 
+                                </td>
+                                <td>{{user.name}} {{user.lastName}}</td>
+                                <td>{{user.email}}</td>
+                                <td>+123 456 789</td>
+                                <td>
+                                    <span class="label label-info">{{user.rol}}</span>
+                                    
+                                </td>
+                                <td>
+                                    <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
+                                    <a href="#" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i> </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2">
+                                    <button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#add-contact">Add New Contact</button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <button (click)="changePage(-10)" class="btn btn-secondary">Previous</button>
+                    &nbsp;
+                    <button (click)="changePage(10)" class="btn btn-secondary">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

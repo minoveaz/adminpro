@@ -14,6 +14,9 @@ import { PromiseComponent } from './promise/promise.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 
+// settings
+import { UsersComponent } from './settings/users/users.component';
+
 
 const routes: Routes = [
 
@@ -28,6 +31,9 @@ const routes: Routes = [
       { path: 'promise', component: PromiseComponent,data:{title: 'Promises'} },
       { path: 'rxjs', component: RxjsComponent,data:{title: 'Rxjs'} },
       { path: 'profile', component: ProfileComponent,data:{title: 'Profile'} },
+
+      //settings
+      { path: 'users', component: UsersComponent,data:{title: 'App Users'} },
       
     ]
   },
