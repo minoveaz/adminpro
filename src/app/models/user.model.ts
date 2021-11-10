@@ -8,14 +8,19 @@ export class User {
         public name: string,
         public lastName: string,
         public email?: string,
-        public image?: string,
+        public img?: string,
         public rol?: string,
         public uid?: string,
     ) {}
 
     get imagenUrl(){
-        if (this.image){
-            return `${base_url}/upload/users/${this.image}`
+
+        if(this.img?.includes('https')){
+            return this.img
+        }
+
+        if (this.img){
+            return `${base_url}/upload/users/${this.img}`
         }else{
             return `${base_url}/upload/users/no-image`
         }

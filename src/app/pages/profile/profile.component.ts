@@ -70,7 +70,7 @@ export class ProfileComponent implements OnInit {
     this.fileUploadService
       .updateUserPhoto( this.uploadImage, 'users', this.user.uid)
       .then( img => {
-        this.user.image = img
+        this.user.img = img
         Swal.fire({title:'Photo Updated', text:'The phot has been saved in your profile', icon:'success', timer: 2500});
       });
     
