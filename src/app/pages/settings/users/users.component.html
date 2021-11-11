@@ -4,13 +4,16 @@
             <div class="card-body">
                 <input type="text"
                         class="form-control"
-                        placeholder="Search user.."/>
+                        placeholder="Search user.."
+                        (keyup)="search( txtSearch.value)"
+                        #txtSearch/>
             </div>
         </div>
     </div>
 </div>
 
-<div class="row animated fadeIn fast">
+<div class="row animated fadeIn fast"
+        *ngIf="loading">
     <div class="col-12">
 
         <div class="alert alert-info text-center">
@@ -22,7 +25,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row animated fadeIn fast" *ngIf="!loading">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -59,7 +62,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
+                                            <div class="modal-footer text-center">
                                                 <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Save</button>
                                                 <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
                                             </div>
@@ -74,12 +77,12 @@
                     <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list footable-loaded footable" data-page-size="10">
                         <thead>
                             <tr>
-                                <th class="w100">Avatar</th>
+                                <th class="">Avatar</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Role</th>
-                                <th class="text-nowrap w100">Actions</th>
+                                <th class="w140">Role</th>
+                                <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -91,12 +94,26 @@
                                 <td>{{user.email}}</td>
                                 <td>+123 456 789</td>
                                 <td>
-                                    <span class="label label-info">{{user.rol}}</span>
-                                    
+                                    <select class="form-control"
+                                            [(ngModel)]="user.rol"
+                                            (change)="changeRole(user)">
+                                        <option value="ADMIN_ROLE">Admin</option>
+                                        <option value="USER_ROLE">User</option>
+                                    </select>
                                 </td>
-                                <td>
-                                    <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                    <a href="#" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-close text-danger"></i> </a>
+                                <td class="text-center">
+                                    <a data-toggle="tooltip" 
+                                        data-original-title="Edit"
+                                        class="cursor"> 
+                                        <i class="fa fa-pencil text-inverse m-r-10"></i> 
+                                    </a>
+
+                                    <a data-toggle="tooltip" 
+                                        data-original-title="Delete"
+                                        class="cursor"
+                                        (click)="deleteUser(user)"> 
+                                        <i class="fa fa-close text-danger"></i> 
+                                    </a>
                                 </td>
                             </tr>
                         </tbody>
@@ -108,9 +125,11 @@
                             </tr>
                         </tfoot>
                     </table>
-                    <button (click)="changePage(-10)" class="btn btn-secondary">Previous</button>
-                    &nbsp;
-                    <button (click)="changePage(10)" class="btn btn-secondary">Next</button>
+                    <div *ngIf="txtSearch.value.length === 0">
+                        <button (click)="changePage(-10)" class="btn btn-secondary">Previous</button>
+                        &nbsp;
+                        <button (click)="changePage(10)" class="btn btn-secondary">Next</button>
+                    </div>
                 </div>
             </div>
         </div>

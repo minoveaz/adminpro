@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import Swal from 'sweetalert2';
+import { SearchsService } from '../../../services/searchs.service';
 
 @Component({
   selector: 'app-users',
@@ -12,20 +14,25 @@ export class UsersComponent implements OnInit {
 
   public totalUsers:number = 0;
   public users: User[] = [];
+  public usersTemp: User[] = [];
   public from: number = 0;
+  public loading: boolean = true;
 
-  constructor( private userService: UserService) { }
+  constructor( private userService: UserService,
+               private searchsService: SearchsService) { }
 
   ngOnInit(): void {
     this.loadUsers()
   }
 
   loadUsers (){
+    this.loading = true;
     this.userService.loadUsers(this.from)
       .subscribe( ({total, users}) => {
         this.totalUsers = total;
         this.users = users
-        console.log(users)
+        this.usersTemp = users
+        this.loading = false
       })
   }
 
@@ -40,4 +47,53 @@ export class UsersComponent implements OnInit {
     this.loadUsers();
   }
 
+  search( termino: string){
+
+    if( termino.length === 0){
+      return this.users = this.usersTemp
+    }
+
+    this.searchsService.search('users', termino)
+      .subscribe( results => {
+        this.users = results
+      })
+  }
+
+  deleteUser( user: User){
+
+    if ( user.uid === this.userService.uid){
+      return Swal.fire('Error', 'You Can not Delete this User', 'error');
+    }
+
+
+    Swal.fire({
+      title: 'Delete User',
+      text: `You are going to delete ${user.name} ${user.lastName} `,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+
+        this.userService.deleteUser(user)
+          .subscribe(resp =>{
+            Swal.fire(
+              'Deleted!',
+              `The user ${user.name} ${user.lastName} has been deleted.`,
+              'success'
+            )
+          });
+        this.loadUsers();
+      }
+    })
+  }
+
+  changeRole(user:User){
+    this.userService.updateUser(user)
+    .subscribe(resp => {
+      console.log(resp);
+    });
+  }
 }

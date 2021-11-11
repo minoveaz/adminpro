@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, delay, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 
@@ -89,11 +89,7 @@ export class UserService {
   }
 
   updateUserProfile( formData: UpdateUserProfileForm){
-    return this.http.put(`${base_url}/users/${this.uid}`, formData, {
-      headers: {
-        'x-token': this.token
-      }
-    });
+    return this.http.put(`${base_url}/users/${this.uid}`, formData, this.headers);
   }
 
   loadUsers( from: number = 0){
@@ -111,5 +107,15 @@ export class UserService {
           console.log(users)
         })
       )
+  }
+
+  deleteUser( user: User){
+    const url = `${base_url}/users/${user.uid}`
+    return this.http.delete(url, this.headers)
+    console.log('eliminando')
+  }
+
+  updateUser( user: User){
+    return this.http.put(`${base_url}/users/${user.uid}`, user, this.headers);
   }
 }
