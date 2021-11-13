@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import Swal from 'sweetalert2';
 
@@ -6,6 +6,8 @@ import Swal from 'sweetalert2';
 import { UserService } from 'src/app/services/user.service';
 import { SearchsService } from '../../../services/searchs.service';
 import { ModalImagenService } from 'src/app/services/modal-imagen.service';
+import { delay } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -14,20 +16,34 @@ import { ModalImagenService } from 'src/app/services/modal-imagen.service';
   styles: [
   ]
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
 
   public totalUsers:number = 0;
   public users: User[] = [];
   public usersTemp: User[] = [];
+
+  public imgSubs: Subscription
   public from: number = 0;
   public loading: boolean = true;
 
   constructor( private userService: UserService,
                private searchsService: SearchsService,
                private modalImageService: ModalImagenService) { }
+  
+  
+  
+  ngOnDestroy(): void {
+    this.imgSubs.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.loadUsers()
+    this.loadUsers();
+
+    this.imgSubs =  this.modalImageService.newImg
+        .pipe(
+          delay(100)
+        )
+        .subscribe( img => this.loadUsers() );
   }
 
   loadUsers (){
@@ -38,6 +54,7 @@ export class UsersComponent implements OnInit {
         this.users = users
         this.usersTemp = users
         this.loading = false
+        //console.log(users)
       })
   }
 
@@ -103,7 +120,7 @@ export class UsersComponent implements OnInit {
   }
 
   openModal(user: User){
-    console.log(user)
-    this.modalImageService.loadModal('users',  user.img)
+    //console.log(user)
+    this.modalImageService.loadModal('users', user.img, user.uid)
   }
 }

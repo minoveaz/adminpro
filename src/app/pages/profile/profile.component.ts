@@ -34,6 +34,7 @@ export class ProfileComponent implements OnInit {
       name: new FormControl(this.user.name,[Validators.required]),
       lastName: new FormControl(this.user.lastName,[Validators.required]),
       email: new FormControl(this.user.email,[Validators.required, Validators.email]),
+      phoneNumber: new FormControl(this.user.phoneNumber,[Validators.required]),
     })
   }
 
@@ -41,10 +42,11 @@ export class ProfileComponent implements OnInit {
     console.log(this.profileForm.value);
     this.userService.updateUserProfile( this.profileForm.value)
         .subscribe(resp => {
-          const { name, lastName,email} = this.profileForm.value
+          const { name, lastName,email,phoneNumber} = this.profileForm.value
           this.user.name = name;
           this.user.lastName = lastName;
           this.user.email = email;
+          this.user.phoneNumber = phoneNumber;
           console.log(resp)
           Swal.fire({title:'Data Updated', text:'Information updated correctly', icon:'success', timer: 2500});
         }, (err) => {
@@ -72,6 +74,9 @@ export class ProfileComponent implements OnInit {
       .then( img => {
         this.user.img = img
         Swal.fire({title:'Photo Updated', text:'The phot has been saved in your profile', icon:'success', timer: 2500});
+      }).catch( err => {
+        console.log(err);
+        Swal.fire('Error', 'Could not upload the image', 'error')
       });
     
   }

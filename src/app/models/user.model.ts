@@ -11,6 +11,7 @@ export class User {
         public img?: string,
         public rol?: string,
         public uid?: string,
+        public phoneNumber?: string,
     ) {}
 
     get imagenUrl(){

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter} from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 const base_url = environment.base_url
@@ -8,11 +8,13 @@ const base_url = environment.base_url
 })
 export class ModalImagenService {
 
-  public type: string;
+  public type: 'users'|'doctors'|'hospitals';
   public id: string;
   public img: string;
 
   private _hideModal: boolean = true;
+
+  public newImg: EventEmitter<string> = new EventEmitter<string>()
 
   get hideModal(){
     return this._hideModal;
@@ -20,12 +22,13 @@ export class ModalImagenService {
 
   loadModal(
     type: 'users'|'doctors'|'hospitals',
-    //uid: string,
-    img: string = 'no-image'
+    img: string = 'no-image',
+    id: any,
+    
   ){
     this._hideModal = false; 
     this.type = type;
-    //this.id = uid;
+    this.id = id;
 
     if( img.includes('https')){
       this.img = img

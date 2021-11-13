@@ -57,8 +57,8 @@ export class UserService {
       }
     }).pipe(
       map( (resp: any) => {
-        const {email, googleLogin, img ='', lastName, name, rol, uid} = resp.userDB
-        this.user = new User(googleLogin,name,lastName, email, img,rol,uid);
+        const {email, googleLogin, img ='', lastName, name, rol, uid, phoneNumber} = resp.userDB
+        this.user = new User(googleLogin,name,lastName, email, img,rol,uid,phoneNumber);
         localStorage.setItem('token', resp.token);
         return true
       }),
@@ -99,7 +99,7 @@ export class UserService {
       .pipe(
         map( resp => {
           const users = resp.users.map( 
-            user => new User(user.google, user.name, user.lastName, user.email, user.img, user.rol, user.uid ))
+            user => new User(user.google, user.name, user.lastName, user.email, user.img, user.rol, user.uid, user.phoneNumber ))
           return {
             total: resp.total,
             users

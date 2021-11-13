@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 import { ModalImagenService } from 'src/app/services/modal-imagen.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modal-imagen',
@@ -13,7 +15,8 @@ export class ModalImagenComponent implements OnInit {
   public uploadImage: File;
   public imgTem:any = null;
 
-  constructor( public modalImagenService: ModalImagenService
+  constructor( public modalImagenService: ModalImagenService,
+               public fileUploadService: FileUploadService
     ) { }
 
   //public closeModals: boolean = false
@@ -39,6 +42,24 @@ export class ModalImagenComponent implements OnInit {
     reader.onloadend = () => {
       this.imgTem = reader.result
     }
+  }
+
+  uploadImagen(){
+
+    const id = this.modalImagenService.id;
+    const type = this.modalImagenService.type;
+
+    this.fileUploadService
+      .updateUserPhoto( this.uploadImage, type, id)
+      .then( img => {
+        Swal.fire({title:'Photo Updated', text:'The phot has been saved in your profile', icon:'success', timer: 2500});
+        this.modalImagenService.newImg.emit(img);
+        this.closeModal();
+      }).catch( err => {
+        console.log(err);
+        Swal.fire('Error', 'Could not upload the image', 'error')
+      });
+    
   }
 
 }
