@@ -7,6 +7,7 @@ import { AuthModule } from './@admin/auth/auth.module';
 
 import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './@admin/nopagefound/nopagefound.component';
+import { PublicModule } from './@public/pages/public.module';
 
 
 
@@ -17,9 +18,10 @@ import { NopagefoundComponent } from './@admin/nopagefound/nopagefound.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     PagesModule,
-    AuthModule
+    PublicModule,
+    AuthModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

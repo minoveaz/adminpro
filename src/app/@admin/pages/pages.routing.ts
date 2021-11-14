@@ -42,11 +42,7 @@ const routes: Routes = [
       
     ]
   },
-  {
-    path: 'home',
-    component: HomeComponent
-
-  }
+ 
 
     //{ path: 'path/:routeParam', component: MyComponent },
     //{ path: 'staticPath', component: ... },
