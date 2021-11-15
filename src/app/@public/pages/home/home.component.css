@@ -1,0 +1,22 @@
+.home {
+    
+    background-color: black;
+}
+
+.login-register {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+    padding: 10% 0;
+    position: fixed; }
+
+    .login-sidebar {
+        padding: 0px;
+        margin-top: 0px; }
+        .login-sidebar .login-box {
+          right: 0px;
+          position: absolute;
+          height: 100%; }
+      
