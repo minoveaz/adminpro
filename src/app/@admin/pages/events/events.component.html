@@ -1,0 +1,133 @@
+<div class="row animated fadeIn fast">
+    <div class="col-6">
+        <a href="#" 
+           data-toggle="modal" 
+           data-target="#add-new-event" 
+           class="btn m-t-10 btn-info btn-block waves-effect waves-light">
+            <i class="ti-plus"></i> 
+            New Event
+        </a>
+    </div>
+</div>
+<br>
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input type="text"
+                        class="form-control"
+                        placeholder="Search event.."
+                        
+                        #txtSearch/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn fast"
+>
+
+<!-- *ngIf="loading" -->
+<div class="col-12">
+
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Loading</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-o">Please Wait</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="row">
+
+    <div id="add-new-event" 
+         class="modal-show fadeIn fast" 
+         tabindex="-1" 
+         role="dialog" 
+         aria-labelledby="myModalLabel" 
+         aria-hidden="true" 
+         [class.hide]="eventsService.hideModal">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Add New Event</h4> </div>
+                <div class="modal-body">
+                    <div class="form-horizontal form-material">
+                        <form class="form-group"
+                             [formGroup]="createEventForm"
+                             (ngSubmit)="createEvent()">
+
+                            <div class="col-md-12 m-b-20">
+                                <input type="text" 
+                                       class="form-control" 
+                                       placeholder="Event name"
+                                       formControlName="name"> 
+                            </div>
+                            <div class="col-md-12 m-b-20">
+                                <label class="control-label">Location</label>
+                                    <select class="form-control custom-select"
+                                            formControlName="location">
+                                        <option *ngFor="let location of Locations">
+                                            {{location}}        
+                                        </option>
+                                    </select>
+                                <small class="form-control-feedback"> Select the Event location </small>  
+                            </div>
+                            <div class="col-md-12 m-b-20">
+                                <label class="control-label">Capacity</label>
+                                <input type="number" 
+                                       class="form-control" 
+                                       placeholder="Capacity"
+                                       formControlName="capacity"> 
+                            </div>
+                            <div class="col-md-12 m-b-20">
+                                <label class="control-label">Event Type</label>
+                                    <select class="form-control custom-select"
+                                            formControlName="eventType">
+                                            <option *ngFor="let eventType of EventTypes">
+                                                {{eventType}}        
+                                            </option>
+                                    </select>
+                                <small class="form-control-feedback"> Select the Event Type </small>  
+                            </div>
+                            <div class="col-md-12 m-b-20">
+                                <div class="form-group row">
+                                    <label for="example-datetime-local-input" class="col-2 col-form-label">Date</label>
+                                    <div class="col-10">
+                                        <input class="form-control" 
+                                                type="datetime-local" 
+                                                value="2011-08-19T13:45:00" 
+                                                id="example-datetime-local-input"
+                                                formControlName="date">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 m-b-20">
+                                <div class="fileupload btn btn-danger btn-rounded waves-effect waves-light">
+                                    <span>
+                                        <i class="ion-upload m-r-5"></i>Upload Image
+                                    </span>
+                                    <input type="file" class="upload"> </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-info waves-effect">Save</button>
+                                <button type="button" 
+                                        class="btn btn-default waves-effect" 
+                                        data-dismiss="modal"
+                                        (click)="closeCreateEventModal()">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+</div>
+
+
+</div>
+

@@ -18,6 +18,13 @@ export class SidebarService {
       ]
     }, 
     {
+      title: 'Events',
+      icon: 'mdi mdi-gauge',
+      submenu:[
+        { title: 'Events List', url: 'events'},
+      ]
+    }, 
+    {
       title: 'Settings',
       icon: 'mdi mdi-folder-lock-open',
       submenu:[

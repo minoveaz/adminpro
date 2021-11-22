@@ -33,6 +33,10 @@
     z-index: 9999;
 }
 
+.swal2-container {
+  z-index: 10000 !important;
+}
+
 .hide{
     display: none;
 }

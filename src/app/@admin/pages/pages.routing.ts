@@ -14,11 +14,16 @@ import { PromiseComponent } from './promise/promise.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { ProfileComponent } from './profile/profile.component';
 
+// Events
+
+import { EventsComponent } from './events/events.component';
+
 // settings
 import { UsersComponent } from './settings/users/users.component';
 import { HospitalsComponent } from './settings/hospitals/hospitals.component';
 import { DoctorsComponent } from './settings/doctors/doctors.component';
 import { HomeComponent } from '../../@public/pages/home/home.component';
+
 
 
 const routes: Routes = [
@@ -34,6 +39,10 @@ const routes: Routes = [
       { path: 'promise', component: PromiseComponent,data:{title: 'Promises'} },
       { path: 'rxjs', component: RxjsComponent,data:{title: 'Rxjs'} },
       { path: 'profile', component: ProfileComponent,data:{title: 'Profile'} },
+
+      //Events
+      { path: 'events', component: EventsComponent,data:{title: 'Events'} },
+
 
       //settings
       { path: 'users', component: UsersComponent,data:{title: 'App Users'} },

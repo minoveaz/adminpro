@@ -22,6 +22,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { UsersComponent } from './settings/users/users.component';
 import { HospitalsComponent } from './settings/hospitals/hospitals.component';
 import { DoctorsComponent } from './settings/doctors/doctors.component';
+import { EventsComponent } from './events/events.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { DoctorsComponent } from './settings/doctors/doctors.component';
     ProfileComponent,
     UsersComponent,
     HospitalsComponent,
-    DoctorsComponent
+    DoctorsComponent,
+    EventsComponent
   ],
   exports:[
     DashboardComponent,
