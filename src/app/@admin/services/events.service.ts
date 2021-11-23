@@ -48,6 +48,5 @@ export class EventsService {
 
   createEvent ( formData:CreateEvent){
     return this.http.post(`${base_url}/events`, formData, this.headers)
-    this.ocultCreateEventModal()
   }
 }

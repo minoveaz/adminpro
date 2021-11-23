@@ -1,9 +1,7 @@
 <div class="row animated fadeIn fast">
     <div class="col-6">
-        <a href="#" 
-           data-toggle="modal" 
-           data-target="#add-new-event" 
-           class="btn m-t-10 btn-info btn-block waves-effect waves-light">
+        <a class="btn m-t-10 btn-info btn-block waves-effect waves-light"
+           (click)="openModal()">
             <i class="ti-plus"></i> 
             New Event
         </a>
@@ -24,11 +22,10 @@
     </div>
 </div>
 
-<div class="row animated fadeIn fast"
->
+<div class="row animated fadeIn fast">
 
 <!-- *ngIf="loading" -->
-<div class="col-12">
+    <div class="col-12">
 
         <div class="alert alert-info text-center">
             <h4 class="alert-heading">Loading</h4>
@@ -36,6 +33,66 @@
             <p class="mb-o">Please Wait</p>
         </div>
 
+    </div>
+</div>
+
+<div class=" row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-tittle">Event List</h4>
+                <div class="table-responsive">
+
+
+                    <!-- List Table -->
+                    <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list footable-loaded footable" data-page-size="10">
+                        <thead>
+                            <tr>
+                                <th class="">Event Name</th>
+                                <th class="w140">Event Type</th>
+                                <th>Date</th>
+                                <th>Location</th>
+                                <th>Capacity</th>
+                                <th>Registered</th>
+                                <th>Attendees</th>
+                                <th class="w140">Status</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  class="footable-even" style="">
+                                <td>Nombre evento</td>
+                                <td>Reunión Adultos</td>
+                                <td>Fecha</td>
+                                <td>lugar</td>
+                                <td>180</td>
+                                <td>170</td>
+                                <td>135</td>
+                                <td>Abierto</td>
+                                <td class="text-center">
+                                    <a data-toggle="tooltip" 
+                                        data-original-title="Edit"
+                                        class="cursor"> 
+                                        <i class="fa fa-pencil text-inverse m-r-10"></i> 
+                                    </a>
+                    
+                                    <a data-toggle="tooltip" 
+                                        data-original-title="Delete"
+                                        class="cursor"
+                                        > 
+                                        <i class="fa fa-close text-danger"></i> 
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -52,7 +109,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <button type="button" 
+                            class="close" 
+                            data-dismiss="modal" 
+                            aria-hidden="true"
+                            >×</button>
                     <h4 class="modal-title" id="myModalLabel">Add New Event</h4> </div>
                 <div class="modal-body">
                     <div class="form-horizontal form-material">
@@ -127,7 +188,6 @@
         </div>
         <!-- /.modal-dialog -->
 </div>
-
 
 </div>
 

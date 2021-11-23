@@ -47,7 +47,7 @@ export class EventsComponent implements OnInit {
     }
     this.eventsService.createEvent(this.createEventForm.value)
       .subscribe( resp => {
-        this.closeCreateEventModal();
+        this.eventsService.ocultCreateEventModal()
         Swal.fire(
           'Created!',
           `The Event has been Created.`,
@@ -59,6 +59,7 @@ export class EventsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
 }
