@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
+import { Event } from '../../models/event.model';
 
 import { EventsService } from '../../services/events.service';
 
@@ -14,6 +15,9 @@ import { EventsService } from '../../services/events.service';
 export class EventsComponent implements OnInit {
 
   public formSubmitted = false;
+  public loading: boolean = true;
+  public events: Event[] = []
+
 
   public createEventForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -30,6 +34,12 @@ export class EventsComponent implements OnInit {
   constructor( private fb: FormBuilder,
                public eventsService: EventsService ) { }
 
+
+
+  ngOnInit(): void {
+    this.loadUsers();
+
+  }
 
   closeCreateEventModal(){
     this.eventsService.ocultCreateEventModal();
@@ -58,8 +68,16 @@ export class EventsComponent implements OnInit {
     
   }
 
-  ngOnInit(): void {
-
+  loadUsers(){
+    this.loading = true
+    this.eventsService.loadEvents()
+      .subscribe( ({events}) => {
+        this.loading = false
+        this.events = events
+        console.log(this.events)
+      })
   }
+
+
 
 }
