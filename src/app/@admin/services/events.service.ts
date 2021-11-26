@@ -57,9 +57,9 @@ export class EventsService {
     return this.http.get<LoadEvents>(url, this.headers)
       .pipe(
         map( resp => {
-          console.log(resp)
+          //console.log(resp)
           const events = resp.events.map(
-            event => new Event(event.name,event.date,event.capacity,event.location,event.eventType,event.img,event.open,event.attendees))
+            event => new Event(event.name,event.date,event.capacity,event.location,event.eventType,event.img,event.open,event.attendees,event._id))
             return{
               events
             }

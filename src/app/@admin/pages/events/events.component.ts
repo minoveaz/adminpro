@@ -17,6 +17,7 @@ export class EventsComponent implements OnInit {
   public formSubmitted = false;
   public loading: boolean = true;
   public events: Event[] = []
+  public openEvents: Number
 
 
   public createEventForm = this.fb.group({
@@ -37,7 +38,7 @@ export class EventsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.loadUsers();
+    this.loadEvents();
 
   }
 
@@ -68,13 +69,18 @@ export class EventsComponent implements OnInit {
     
   }
 
-  loadUsers(){
+  loadEvents(){
     this.loading = true
     this.eventsService.loadEvents()
       .subscribe( ({events}) => {
         this.loading = false
         this.events = events
+        const openEvents = events.filter( e => {
+          return e.open === true
+        })
+        this.openEvents = openEvents.length
         console.log(this.events)
+        console.log(openEvents)
       })
   }
 

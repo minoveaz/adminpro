@@ -23,6 +23,7 @@ import { UsersComponent } from './settings/users/users.component';
 import { HospitalsComponent } from './settings/hospitals/hospitals.component';
 import { DoctorsComponent } from './settings/doctors/doctors.component';
 import { HomeComponent } from '../../@public/pages/home/home.component';
+import { AttendeesComponent } from './attendees/attendees.component';
 
 
 
@@ -42,6 +43,7 @@ const routes: Routes = [
 
       //Events
       { path: 'events', component: EventsComponent,data:{title: 'Events'} },
+      { path: 'events/attendees', component: AttendeesComponent,data:{title: 'Attendees List'} },
 
 
       //settings

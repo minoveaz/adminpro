@@ -10,6 +10,7 @@ export class Event {
         public img?:  String,
         public open?:  Boolean,
         public attendees?: Array<Attendee>,
+        public _id?: String
     ) {}
 }
 

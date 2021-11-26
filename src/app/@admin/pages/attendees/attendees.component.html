@@ -1,0 +1,123 @@
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <input type="text"
+                        class="form-control"
+                        placeholder="Search Attendee.."
+                        #txtSearch/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Loading</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-o">Please Wait</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="row animated fadeIn fast">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Attendee  list</h4>
+                <h6 class="card-subtitle">Total Attendees </h6>
+                <div class="table-responsive">
+
+                    
+
+                    <div class="row m-t-40">
+                        <!-- Column -->
+                        <div class="col-md-6 col-lg-3 col-xlg-3">
+                            <div class="card">
+                                <div class="box bg-info text-center">
+                                    <h1 class="font-light text-white"> totalUsers</h1>
+                                    <h6 class="text-white">Total Users</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-md-6 col-lg-3 col-xlg-3">
+                            <div class="card">
+                                <div class="box bg-primary text-center">
+                                    <h1 class="font-light text-white">1,738</h1>
+                                    <h6 class="text-white">Responded</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-md-6 col-lg-3 col-xlg-3">
+                            <div class="card">
+                                <div class="box bg-success text-center">
+                                    <h1 class="font-light text-white">1100</h1>
+                                    <h6 class="text-white">Resolve</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <div class="col-md-6 col-lg-3 col-xlg-3">
+                            <div class="card">
+                                <div class="box bg-dark text-center">
+                                    <h1 class="font-light text-white">964</h1>
+                                    <h6 class="text-white">Pending</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                    </div>
+
+
+
+                    <!-- List Table -->
+
+                    <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list footable-loaded footable" data-page-size="10">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  class="footable-even" style="">
+                                <td>Nombre apellido</td>
+                                <td>user.email</td>
+                                <td>user.phoneNumber</td>
+                                <td class="text-center">
+                                    <a data-toggle="tooltip" 
+                                        data-original-title="Edit"
+                                        class="cursor"> 
+                                        <i class="fa fa-pencil text-inverse m-r-10"></i> 
+                                    </a>
+
+                                    <a data-toggle="tooltip" 
+                                        data-original-title="Delete"
+                                        class="cursor"
+                                        > 
+                                        <i class="fa fa-close text-danger"></i> 
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            
+                        </tfoot>
+                    </table>
+                    <div *ngIf="txtSearch.value.length === 0">
+                        <button  class="btn btn-secondary">Previous</button>
+                        &nbsp;
+                        <button  class="btn btn-secondary">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

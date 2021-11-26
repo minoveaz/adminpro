@@ -12,12 +12,12 @@ import { ModalImagenComponent } from './modal-imagen/modal-imagen.component';
   declarations: [
     IncreaserComponent,
     DoughnutComponent,
-    ModalImagenComponent
+    ModalImagenComponent,
   ],
   exports:[
     IncreaserComponent,
     DoughnutComponent,
-    ModalImagenComponent
+    ModalImagenComponent,
   ],
   imports: [
     CommonModule,
