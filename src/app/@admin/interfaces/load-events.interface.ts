@@ -1,8 +1,9 @@
-import { Event } from "../models/event.model";
+import { Attendee, Event } from "../models/event.model";
 
 
 
 export interface LoadEvents {
     
     events: Event[];
+    attendees: Attendee[];
 }

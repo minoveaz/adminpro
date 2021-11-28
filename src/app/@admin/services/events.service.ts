@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Event } from '../models/event.model';
+import { Attendee, Event } from '../models/event.model';
 
 import { CreateEvent } from '../interfaces/create-event.interface';
 import { environment } from 'src/environments/environment';
@@ -15,9 +15,9 @@ const base_url = environment.base_url;
 export class EventsService {
 
   public event: Event;
+  public attendee: Attendee
 
   public _hideModal: boolean = true;
-
 
   constructor( private http: HttpClient) { }
 
@@ -57,7 +57,7 @@ export class EventsService {
     return this.http.get<LoadEvents>(url, this.headers)
       .pipe(
         map( resp => {
-          //console.log(resp)
+          console.log(resp)
           const events = resp.events.map(
             event => new Event(event.name,event.date,event.capacity,event.location,event.eventType,event.img,event.open,event.attendees,event._id))
             return{
@@ -65,5 +65,18 @@ export class EventsService {
             }
         })
       )
+  }
+
+  loadAttendees(eventId:string){
+    const url = `${base_url}/events/${eventId}`
+    console.log(url)
+    console.log(this.token)
+    return this.http.get(url, this.headers)
+      .pipe(
+        map( resp => {
+          console.log(resp)
+        })
+      )
+    
   }
 }

@@ -43,7 +43,7 @@ const routes: Routes = [
 
       //Events
       { path: 'events', component: EventsComponent,data:{title: 'Events'} },
-      { path: 'events/attendees', component: AttendeesComponent,data:{title: 'Attendees List'} },
+      { path: 'events/attendees/:id', component: AttendeesComponent,data:{title: 'Attendees List'} },
 
 
       //settings
