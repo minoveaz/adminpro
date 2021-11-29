@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Attendee, Event } from '../../models/event.model';
 import { EventsService } from '../../services/events.service';
@@ -11,13 +11,18 @@ import { EventsService } from '../../services/events.service';
 })
 export class AttendeesComponent implements OnInit {
 
-  public event: Event
-  public attendees: Attendee[] = []
-  public id: any
+  @Input() title: string = 'Sin Titulo'
+
+  public event: Event;
+  public loading: boolean = true;
+  public attendees: Attendee[] = [];
+  public id: any;
+  public confirmed: Attendee[] = [];
+  public noAttend: Attendee[] = [];
 
   constructor( private eventService: EventsService,
                private route: ActivatedRoute) {
-    this.event = eventService.event
+
    }
 
   ngOnInit(): void {
@@ -25,19 +30,23 @@ export class AttendeesComponent implements OnInit {
     const EventId = this.route.snapshot.paramMap.get('id');
 
     this.id = EventId
-    console.log(EventId)
-
-    this.loadAttendees()
- 
+    this.loadAttendees() 
   }
 
   loadAttendees(){
+    this.loading = true
     this.eventService.loadAttendees(this.id)
-      /* .subscribe(({attendees}) => {
+      .subscribe(({attendees}) => {
+        this.loading = false
         this.attendees = attendees
-        console.log(this.attendees)
-      }) */
+        this.confirmed = attendees.filter( attende => {
+          return attende.status === 'Confirmed'
+        })
+        
+        this.noAttend = attendees.filter( attende => {
+          return attende.status === 'notAttend'
+        })
+      })
 
-      console.log(this.id)
   }
 }

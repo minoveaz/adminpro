@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaderResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Attendee, Event } from '../models/event.model';
 
 import { CreateEvent } from '../interfaces/create-event.interface';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { LoadEvents } from '../interfaces/load-events.interface';
 
 const base_url = environment.base_url;
@@ -57,7 +57,7 @@ export class EventsService {
     return this.http.get<LoadEvents>(url, this.headers)
       .pipe(
         map( resp => {
-          console.log(resp)
+          //console.log(resp)
           const events = resp.events.map(
             event => new Event(event.name,event.date,event.capacity,event.location,event.eventType,event.img,event.open,event.attendees,event._id))
             return{
@@ -69,14 +69,18 @@ export class EventsService {
 
   loadAttendees(eventId:string){
     const url = `${base_url}/events/${eventId}`
-    console.log(url)
-    console.log(this.token)
-    return this.http.get(url, this.headers)
+    return this.http.get<LoadEvents>(url, this.headers)
+    //.pipe(map(res => console.log(res)))
       .pipe(
-        map( resp => {
-          console.log(resp)
-        })
+        map(
+        data => {
+          const attendees = data.attendees.map(
+            attendee => new Attendee(attendee.email,attendee.lastName,attendee.name,attendee.phoneNumber,attendee.status,attendee.id))
+            return{
+              attendees
+            }
+        },
+        )
       )
-    
   }
 }

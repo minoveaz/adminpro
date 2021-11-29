@@ -11,7 +11,8 @@
     </div>
 </div>
 
-<div class="row animated fadeIn fast">
+<div class="row animated fadeIn fast"
+        *ngIf="loading">
     <div class="col-12">
 
         <div class="alert alert-info text-center">
@@ -38,8 +39,8 @@
                         <div class="col-md-6 col-lg-3 col-xlg-3">
                             <div class="card">
                                 <div class="box bg-info text-center">
-                                    <h1 class="font-light text-white"> totalUsers</h1>
-                                    <h6 class="text-white">Total Users</h6>
+                                    <h1 class="font-light text-white"></h1>
+                                    <h6 class="text-white">Capacity</h6>
                                 </div>
                             </div>
                         </div>
@@ -47,8 +48,8 @@
                         <div class="col-md-6 col-lg-3 col-xlg-3">
                             <div class="card">
                                 <div class="box bg-primary text-center">
-                                    <h1 class="font-light text-white">1,738</h1>
-                                    <h6 class="text-white">Responded</h6>
+                                    <h1 class="font-light text-white">{{attendees.length}}</h1>
+                                    <h6 class="text-white">Registered</h6>
                                 </div>
                             </div>
                         </div>
@@ -56,8 +57,8 @@
                         <div class="col-md-6 col-lg-3 col-xlg-3">
                             <div class="card">
                                 <div class="box bg-success text-center">
-                                    <h1 class="font-light text-white">1100</h1>
-                                    <h6 class="text-white">Resolve</h6>
+                                    <h1 class="font-light text-white">{{confirmed.length}}</h1>
+                                    <h6 class="text-white">Confirmed</h6>
                                 </div>
                             </div>
                         </div>
@@ -65,8 +66,8 @@
                         <div class="col-md-6 col-lg-3 col-xlg-3">
                             <div class="card">
                                 <div class="box bg-dark text-center">
-                                    <h1 class="font-light text-white">964</h1>
-                                    <h6 class="text-white">Pending</h6>
+                                    <h1 class="font-light text-white">{{noAttend.length}}</h1>
+                                    <h6 class="text-white">Not Attended</h6>
                                 </div>
                             </div>
                         </div>
@@ -81,16 +82,20 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Last Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                <th>Status</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr  class="footable-even" style="">
-                                <td>Nombre apellido</td>
-                                <td>user.email</td>
-                                <td>user.phoneNumber</td>
+                            <tr *ngFor="let attendee of attendees" class="footable-even" style="">
+                                <td>{{attendee.name}}</td>
+                                <td>{{attendee.lastName}}</td>
+                                <td>{{attendee.email}}</td>
+                                <td>{{attendee.phoneNumber}}</td>
+                                <td>{{attendee.status}}</td>
                                 <td class="text-center">
                                     <a data-toggle="tooltip" 
                                         data-original-title="Edit"
