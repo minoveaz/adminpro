@@ -22,6 +22,6 @@ export class Attendee {
         public name: String,
         public phoneNumber: String,
         public status: String,
-        public id: String,
+        public _id: String,
     ){}
 }

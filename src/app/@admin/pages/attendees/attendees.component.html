@@ -98,15 +98,24 @@
                                 <td>{{attendee.status}}</td>
                                 <td class="text-center">
                                     <a data-toggle="tooltip" 
+                                        data-original-title="Confirm"
+                                        class="cursor"
+                                        [(ngModel)]="attendee.status"
+                                        (click)="confirmAttendee(attendee)"
+                                        value="Confirmed">
+                                        <i class="fa fa-check text-inverse m-r-10"></i> 
+                                    </a>
+                                    <a data-toggle="tooltip" 
                                         data-original-title="Edit"
-                                        class="cursor"> 
+                                        class="cursor"
+                                        (click)="updateAttendee(attendee)"> 
                                         <i class="fa fa-pencil text-inverse m-r-10"></i> 
                                     </a>
 
                                     <a data-toggle="tooltip" 
                                         data-original-title="Delete"
                                         class="cursor"
-                                        > 
+                                        (click)="deleteAttendee(attendee)"> 
                                         <i class="fa fa-close text-danger"></i> 
                                     </a>
                                 </td>

@@ -19,6 +19,7 @@ export class AttendeesComponent implements OnInit {
   public id: any;
   public confirmed: Attendee[] = [];
   public noAttend: Attendee[] = [];
+  public confirmedStatus: boolean = false;
 
   constructor( private eventService: EventsService,
                private route: ActivatedRoute) {
@@ -39,6 +40,7 @@ export class AttendeesComponent implements OnInit {
       .subscribe(({attendees}) => {
         this.loading = false
         this.attendees = attendees
+        console.log(this.attendees)
         this.confirmed = attendees.filter( attende => {
           return attende.status === 'Confirmed'
         })
@@ -48,5 +50,22 @@ export class AttendeesComponent implements OnInit {
         })
       })
 
+  }
+
+  updateAttendee(attendee: Attendee){
+    console.log('por aqui paso');
+    console.log(attendee._id)
+    
+  }
+
+  confirmAttendee(attendee: Attendee){
+    console.log(attendee._id)
+    console.log(this.id)
+    console.log(attendee)
+  }
+
+  deleteAttendee(attendee: Attendee){
+    console.log('por aqui paso');
+    console.log(attendee._id)
   }
 }

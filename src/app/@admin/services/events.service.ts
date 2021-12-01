@@ -46,8 +46,6 @@ export class EventsService {
     this._hideModal = true
   }
 
-  
-
   createEvent ( formData:CreateEvent){
     return this.http.post(`${base_url}/events`, formData, this.headers)
   }
@@ -75,7 +73,7 @@ export class EventsService {
         map(
         data => {
           const attendees = data.attendees.map(
-            attendee => new Attendee(attendee.email,attendee.lastName,attendee.name,attendee.phoneNumber,attendee.status,attendee.id))
+            attendee => new Attendee(attendee.email,attendee.lastName,attendee.name,attendee.phoneNumber,attendee.status,attendee._id))
             return{
               attendees
             }
@@ -83,4 +81,12 @@ export class EventsService {
         )
       )
   }
+
+/*----------------------------------------- atteendees --------------------------------- */
+
+  updateAttendee(attendee: Attendee){
+
+  }
+
+
 }
