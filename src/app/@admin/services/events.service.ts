@@ -84,9 +84,16 @@ export class EventsService {
 
 /*----------------------------------------- atteendees --------------------------------- */
 
-  updateAttendee(attendee: Attendee){
-
+  confirmAttendee(eventId:string, attendee:string, status:JSON){
+   const url = `${base_url}/events/${eventId}/${attendee}`
+   return this.http.put(url, status, this.headers)
   }
+
+  deleteAttendee(eventId:string, attendee:string){
+    const url = `${base_url}/events/${eventId}/${attendee}`
+    return this.http.delete(url,this.headers)
+  }
+
 
 
 }

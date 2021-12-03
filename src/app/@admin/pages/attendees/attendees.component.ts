@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { delay } from 'rxjs/operators';
 import { Attendee, Event } from '../../models/event.model';
 import { EventsService } from '../../services/events.service';
 
@@ -29,7 +30,6 @@ export class AttendeesComponent implements OnInit {
   ngOnInit(): void {
 
     const EventId = this.route.snapshot.paramMap.get('id');
-
     this.id = EventId
     this.loadAttendees() 
   }
@@ -40,7 +40,6 @@ export class AttendeesComponent implements OnInit {
       .subscribe(({attendees}) => {
         this.loading = false
         this.attendees = attendees
-        console.log(this.attendees)
         this.confirmed = attendees.filter( attende => {
           return attende.status === 'Confirmed'
         })
@@ -58,14 +57,22 @@ export class AttendeesComponent implements OnInit {
     
   }
 
-  confirmAttendee(attendee: Attendee){
-    console.log(attendee._id)
-    console.log(this.id)
-    console.log(attendee)
+  confirmAttendee(attendee: Attendee, attendeeStatus:string){
+    const attendeId: any = attendee._id
+    const status: any = {"status": `${attendeeStatus}`}
+    this.eventService.confirmAttendee(this.id,attendeId,status)
+      .subscribe(resp => {
+        console.log(resp)
+      })
+    this.loadAttendees()
   }
 
   deleteAttendee(attendee: Attendee){
-    console.log('por aqui paso');
-    console.log(attendee._id)
+   const attendeId: any = attendee._id
+   this.eventService.deleteAttendee(this.id,attendeId)
+     .subscribe(resp => {
+       console.log(resp)
+     });
+     this.loadAttendees()
   }
 }

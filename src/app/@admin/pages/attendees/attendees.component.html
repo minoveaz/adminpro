@@ -99,11 +99,9 @@
                                 <td class="text-center">
                                     <a data-toggle="tooltip" 
                                         data-original-title="Confirm"
-                                        class="cursor"
-                                        [(ngModel)]="attendee.status"
-                                        (click)="confirmAttendee(attendee)"
-                                        value="Confirmed">
-                                        <i class="fa fa-check text-inverse m-r-10"></i> 
+                                        class="cursor">
+                                        <i class="fa fa-check text-inverse m-r-10"                        
+                                        (click)="confirmAttendee(attendee,'Confirmed')"></i> 
                                     </a>
                                     <a data-toggle="tooltip" 
                                         data-original-title="Edit"
