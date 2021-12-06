@@ -45,6 +45,18 @@
     background-color: black
 }
 
+.green-color{
+  color: greenyellow !important;
+}
+
+.confirmed {
+  background-color:#06d79c;
+}
+
+
+
+
+
 #bg {
   position: fixed; 
   top: -50%; 

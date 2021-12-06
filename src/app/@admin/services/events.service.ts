@@ -94,6 +94,4 @@ export class EventsService {
     return this.http.delete(url,this.headers)
   }
 
-
-
 }

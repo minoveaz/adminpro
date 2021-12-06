@@ -90,26 +90,21 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let attendee of attendees" class="footable-even" style="">
+                            <tr *ngFor="let attendee of attendees"          class="footable-even" style=""
+                            [ngClass]="{'confirmed': attendee.status === 'Confirmed'}">
                                 <td>{{attendee.name}}</td>
                                 <td>{{attendee.lastName}}</td>
                                 <td>{{attendee.email}}</td>
                                 <td>{{attendee.phoneNumber}}</td>
                                 <td>{{attendee.status}}</td>
                                 <td class="text-center">
-                                    <a data-toggle="tooltip" 
+                                    <a  data-toggle="tooltip" 
                                         data-original-title="Confirm"
-                                        class="cursor">
-                                        <i class="fa fa-check text-inverse m-r-10"                        
+                                        class="cursor"
+                                        *ngIf="registeredStatus">
+                                        <i class="fa fa-check green-color text-inverse m-r-10"
                                         (click)="confirmAttendee(attendee,'Confirmed')"></i> 
                                     </a>
-                                    <a data-toggle="tooltip" 
-                                        data-original-title="Edit"
-                                        class="cursor"
-                                        (click)="updateAttendee(attendee)"> 
-                                        <i class="fa fa-pencil text-inverse m-r-10"></i> 
-                                    </a>
-
                                     <a data-toggle="tooltip" 
                                         data-original-title="Delete"
                                         class="cursor"
@@ -138,7 +133,7 @@
 </div>
 
 
-<div class="card">
+<!-- <div class="card">
     <div class="card-body">
         <h4 class="card-title">Swipe Table</h4>
         <h6 class="card-subtitle">The Column Swipe Table allows the user to select which columns they want to be visible.</h6>
@@ -238,4 +233,4 @@
             </tbody>
         </table>
     </div>
-</div>
+</div> -->

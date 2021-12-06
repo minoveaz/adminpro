@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { delay } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 import { Attendee, Event } from '../../models/event.model';
 import { EventsService } from '../../services/events.service';
 
@@ -20,7 +21,7 @@ export class AttendeesComponent implements OnInit {
   public id: any;
   public confirmed: Attendee[] = [];
   public noAttend: Attendee[] = [];
-  public confirmedStatus: boolean = false;
+  public registeredStatus: boolean = true;
 
   constructor( private eventService: EventsService,
                private route: ActivatedRoute) {
@@ -63,16 +64,24 @@ export class AttendeesComponent implements OnInit {
     this.eventService.confirmAttendee(this.id,attendeId,status)
       .subscribe(resp => {
         console.log(resp)
+        this.loadAttendees()
+        this.registeredStatus = false
       })
-    this.loadAttendees()
+    
   }
 
   deleteAttendee(attendee: Attendee){
    const attendeId: any = attendee._id
    this.eventService.deleteAttendee(this.id,attendeId)
      .subscribe(resp => {
+       Swal.fire({
+         title:'Attende Deleted', 
+         text:'the user has been deleted from the Event', 
+         icon:'success', 
+         timer: 2500})
+         this.loadAttendees()
        console.log(resp)
      });
-     this.loadAttendees()
+     
   }
 }
