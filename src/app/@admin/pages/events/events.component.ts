@@ -19,6 +19,10 @@ export class EventsComponent implements OnInit {
   public events: Event[] = []
   public openEvents: Number
 
+  public eventStatusForm = this.fb.group({
+    statusEvent: []
+  })
+
 
   public createEventForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
@@ -39,6 +43,8 @@ export class EventsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadEvents();
+    this.eventStatusForm.setValue( {... this.events})
+    console.log()
 
   }
 
