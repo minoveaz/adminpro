@@ -74,17 +74,18 @@
                                 <th>Event Name</th>
                                 <th>Event Type</th>
                                 <th>Date</th>
-                                <th class="w140">Location</th>
+                                <th>Location</th>
                                 <th>Capacity</th>
                                 <th>Registered</th>
                                 <th>Attendees</th>
-                                <th>Status</th>
+                                <th class="text-center">Status</th>
                                 <th class="text-center">Actions</th>
                                 <th class="text-center">List of Attendees</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let event of events" class="footable-even" style="">
+                            <tr *ngFor="let event of events" class="footable-even" style=""
+                                [ngClass]="{'confirmed': event.open }">
                                 <td class="w200">{{event.name}}</td>
                                 <td>{{event.eventType}}</td>
                                 <td>{{event.date}}</td>
@@ -92,25 +93,13 @@
                                 <td class="text-center">{{event.capacity}}</td>
                                 <td class="text-center">{{event.attendees?.length}}</td>
                                 <td class="text-center">135</td>
-                                <td>
-                                    <form action=""
-                                           [formGroup]="eventStatusForm">
-                                        <div class="checkerToggle">
-                                            <label class="checker">
-                                                <input class="checkbox" 
-                                                        type="checkbox" 
-                                                        formControlName="statusEvent"
-                                                        />
-                                                <div class="check-bg"></div>
-                                                <div class="checkmark">
-                                                  <svg viewBox="0 0 100 100">
-                                                    <path d="M20,55 L40,75 L77,27" fill="none" stroke="#FFF" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
-                                                  </svg>
-                                                </div>
-                                            </label>
-                                            {{event.open}}
-                                        </div>
-                                    </form>                                    
+                                <td class="text-center">
+                                    <select class="form-control w100"
+                                            [(ngModel)]="event.open"
+                                            (change)="changeEventStatus(event)">
+                                        <option value="true">Active</option>
+                                        <option value="false">Inactive</option>
+                                    </select>
                                 </td>
                                 <td class="text-center">
                                     <a data-toggle="tooltip" 
@@ -122,7 +111,7 @@
                                     <a data-toggle="tooltip" 
                                         data-original-title="Delete"
                                         class="cursor"
-                                        > 
+                                        (click)="deleteEvent(event)"> 
                                         <i class="fa fa-close text-danger"></i> 
                                     </a>
                                 </td>

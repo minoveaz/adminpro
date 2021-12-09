@@ -101,9 +101,10 @@
                                     <a  data-toggle="tooltip" 
                                         data-original-title="Confirm"
                                         class="cursor"
-                                        *ngIf="registeredStatus">
+                                        >
                                         <i class="fa fa-check green-color text-inverse m-r-10"
-                                        (click)="confirmAttendee(attendee,'Confirmed')"></i> 
+                                        (click)="confirmAttendee(attendee,'Confirmed')"
+                                        *ngIf="registeredStatus"></i> 
                                     </a>
                                     <a data-toggle="tooltip" 
                                         data-original-title="Delete"

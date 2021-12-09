@@ -82,6 +82,17 @@ export class EventsService {
       )
   }
 
+
+  deleteEvent(event: Event){
+    const url = `${base_url}/events/${event._id}`
+    return this.http.delete(url,this.headers)
+  }
+
+  updateEvent(event: Event){
+    const url = `${base_url}/events/${event._id}`
+    return this.http.put(url, event, this.headers)
+  }
+
 /*----------------------------------------- atteendees --------------------------------- */
 
   confirmAttendee(eventId:string, attendee:string, status:JSON){

@@ -20,7 +20,7 @@ export class EventsComponent implements OnInit {
   public openEvents: Number
 
   public eventStatusForm = this.fb.group({
-    statusEvent: []
+    statusEvent: [false]
   })
 
 
@@ -43,9 +43,6 @@ export class EventsComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadEvents();
-    this.eventStatusForm.setValue( {... this.events})
-    console.log()
-
   }
 
   closeCreateEventModal(){
@@ -85,9 +82,40 @@ export class EventsComponent implements OnInit {
           return e.open === true
         })
         this.openEvents = openEvents.length
-        console.log(this.events)
-        console.log(openEvents)
       })
+  }
+
+  deleteEvent( event: Event){
+    Swal.fire({
+      title: 'Delete Event',
+      text: `You are going to delete ${event.name} from ${event.date} `,
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.value) {
+
+        this.eventsService.deleteEvent(event)
+          .subscribe(resp =>{
+            Swal.fire(
+              'Deleted!',
+              `The user ${event.name} from ${event.date} has been deleted.`,
+              'success'
+            )
+            this.loadEvents();
+          });
+      }
+    })
+  }
+
+  changeEventStatus(event: Event){
+    this.eventsService.updateEvent(event)
+    .subscribe(resp => {
+      console.log(resp)
+      this.loadEvents();
+    })
   }
 
 
