@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card ">
+            <div class="card-body">
+                <form class="form-horizontal"
+                     [formGroup]="updateEventForm">
+                    
+                     <div class="form-body">
+                        <h3 class="box-title">Event Info</h3>
+                        <hr class="m-t-0 m-b-40">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Event Name</label>
+                                    <div class="col-md-9">
+                                        <input type="text" 
+                                                class="form-control" 
+                                                placeholder=""
+                                                formControlName="name">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Location</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control custom-select"
+                                                formControlName="location">
+                                            <option *ngFor="let location of Locations" [ngValue]="location">
+                                                {{location}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Capacity</label>
+                                    <div class="col-md-9">
+                                        <input type="number" 
+                                               class="form-control" 
+                                               placeholder=""
+                                               formControlName="capacity">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label for="example-datetime-local-input" class="control-label text-right col-md-3">Date</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control" 
+                                                type="datetime-local" 
+                                                value="2011-08-19T13:45:00" 
+                                                id="example-datetime-local-input"
+                                                formControlName="date">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Event Type</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control custom-select" 
+                                                data-placeholder="Choose a Category" 
+                                                tabindex="1"
+                                                formControlName="eventType">
+                                            <option *ngFor="let eventType of EventTypes" [ngValue]="eventType">
+                                                {{eventType}}
+                                            </option>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+
+                            <!--/span-->
+                        </div>
+                        
+                    </div>
+                    <hr>
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" class="btn btn-success">Update Event</button>
+                                        <button type="button" 
+                                        class="btn btn-inverse"
+                                        routerLink="/dashboard/events"
+                                        >Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6"> </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

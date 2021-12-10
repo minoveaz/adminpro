@@ -48,6 +48,9 @@ export class AttendeesComponent implements OnInit {
         this.noAttend = attendees.filter( attende => {
           return attende.status === 'notAttend'
         })
+        
+        
+
       })
 
   }

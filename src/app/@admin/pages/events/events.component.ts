@@ -32,6 +32,9 @@ export class EventsComponent implements OnInit {
     date: ['',[Validators.required]],
   })
 
+ 
+  
+
   Locations = ["Calle Ailanto 18", "CINESA Principe Pio"]  
   EventTypes = ["Reunión Adultos", "Reunión Kids"]
 
@@ -51,6 +54,10 @@ export class EventsComponent implements OnInit {
 
   openModal (){
     this.eventsService.openCreateEventModal();
+  }
+
+  openEditModal(){
+
   }
 
   createEvent(){
@@ -83,6 +90,10 @@ export class EventsComponent implements OnInit {
         })
         this.openEvents = openEvents.length
       })
+  }
+
+  updateEvent(){
+
   }
 
   deleteEvent( event: Event){

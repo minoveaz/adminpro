@@ -65,6 +65,18 @@ export class EventsService {
       )
   }
 
+  getEvent(eventId:string){
+    const url = `${base_url}/events/${eventId}`
+    return this.http.get<LoadEvents>(url, this.headers)
+    .pipe(
+      map( (resp: any) => {
+        const {name, date,capacity, location, eventType, open,} = resp.eventData
+        this.event = new Event(name, date,capacity,location, eventType);
+        return true
+      })
+    )
+  }
+
   loadAttendees(eventId:string){
     const url = `${base_url}/events/${eventId}`
     return this.http.get<LoadEvents>(url, this.headers)

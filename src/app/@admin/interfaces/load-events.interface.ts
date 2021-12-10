@@ -6,4 +6,5 @@ export interface LoadEvents {
     
     events: Event[];
     attendees: Attendee[];
+    eventData: Event[]
 }
