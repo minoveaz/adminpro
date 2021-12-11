@@ -72,7 +72,7 @@ export class EventsService {
       map( (resp: any) => {
         const {name, date,capacity, location, eventType, open,} = resp.eventData
         this.event = new Event(name, date,capacity,location, eventType);
-        return true
+        return this.event
       })
     )
   }

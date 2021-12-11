@@ -27,12 +27,13 @@ export class EventComponent implements OnInit {
                public eventsService: EventsService,
                private route: ActivatedRoute) {
   
-  this.event = eventsService.event
+ 
                 }
 
   ngOnInit(): void {
     const EventId = this.route.snapshot.paramMap.get('id');
     this.id = EventId
+    this.loadEvent();
 
     this.updateEventForm = new FormGroup({
       name: new FormControl(this.event.name,[Validators.required]),
@@ -43,13 +44,13 @@ export class EventComponent implements OnInit {
 
     })
 
-    this.loadEvent();
+    
   }
 
   loadEvent(){
     this.eventsService.getEvent(this.id)
       .subscribe(resp =>{
-        console.log(resp)
+        this.event = resp
         console.log(this.event)
       })
   }
