@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2'
-import { Event } from '../../models/event.model';
+import { Attendee, Event } from '../../models/event.model';
 
 import { EventsService } from '../../services/events.service';
 
@@ -18,6 +18,7 @@ export class EventsComponent implements OnInit {
   public loading: boolean = true;
   public events: Event[] = []
   public openEvents: Number
+  public attendee: Attendee
 
   public eventStatusForm = this.fb.group({
     statusEvent: [false]
@@ -40,7 +41,11 @@ export class EventsComponent implements OnInit {
 
   
   constructor( private fb: FormBuilder,
-               public eventsService: EventsService ) { }
+               public eventsService: EventsService ) { 
+
+                this.attendee = eventsService.attendee
+
+               }
 
 
 
@@ -89,6 +94,7 @@ export class EventsComponent implements OnInit {
           return e.open === true
         })
         this.openEvents = openEvents.length
+        console.log(this.events)
       })
   }
 

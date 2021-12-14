@@ -6,6 +6,7 @@ import { CreateEvent } from '../interfaces/create-event.interface';
 import { environment } from 'src/environments/environment';
 import { catchError, map } from 'rxjs/operators';
 import { LoadEvents } from '../interfaces/load-events.interface';
+import { Observable } from 'rxjs';
 
 const base_url = environment.base_url;
 
@@ -70,8 +71,8 @@ export class EventsService {
     return this.http.get<LoadEvents>(url, this.headers)
     .pipe(
       map( (resp: any) => {
-        const {name, date,capacity, location, eventType, open,} = resp.eventData
-        this.event = new Event(name, date,capacity,location, eventType);
+        const {name, date,capacity, location, eventType, open,attendees,_id} = resp.eventData
+        this.event = new Event(name, date,capacity,location, eventType,'',open,attendees,_id)
         return this.event
       })
     )

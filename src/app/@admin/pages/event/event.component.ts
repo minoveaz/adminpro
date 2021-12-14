@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
+import { Moment } from 'moment';
+
 import Swal from 'sweetalert2'
 import { Event } from '../../models/event.model';
 
@@ -24,35 +27,34 @@ export class EventComponent implements OnInit {
   
 
   constructor( private fb: FormBuilder,
-               public eventsService: EventsService,
+               private eventsService: EventsService,
                private route: ActivatedRoute) {
   
+        
  
                 }
 
   ngOnInit(): void {
     const EventId = this.route.snapshot.paramMap.get('id');
     this.id = EventId
-    this.loadEvent();
-
-    this.updateEventForm = new FormGroup({
-      name: new FormControl(this.event.name,[Validators.required]),
-      location: new FormControl('CINESA Principe Pio',[Validators.required]),
-      capacity: new FormControl('90',[Validators.required]),
-      eventType: new FormControl('Reunión Kids',[Validators.required]),
-      date: new FormControl('',[Validators.required]),
-
-    })
-
-    
+    this.loadEvent();    
   }
 
   loadEvent(){
     this.eventsService.getEvent(this.id)
       .subscribe(resp =>{
         this.event = resp
-        console.log(this.event)
+        const isoDate = this.event.date
+        const newDate = moment.utc(isoDate).format('YYYY-MM-DDThh:mm')
+        this.updateEventForm = new FormGroup({
+          name: new FormControl(this.event.name,[Validators.required]),
+          location: new FormControl(this.event.location,[Validators.required]),
+          capacity: new FormControl(this.event.capacity,[Validators.required]),
+          eventType: new FormControl(this.event.eventType,[Validators.required]),
+          date: new FormControl(newDate,[Validators.required]),
+        })
       })
+      
   }
 
 
