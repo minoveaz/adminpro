@@ -88,7 +88,7 @@ export class EventsService {
           const attendees = data.attendees.map(
             attendee => new Attendee(attendee.email,attendee.lastName,attendee.name,attendee.phoneNumber,attendee.status,attendee._id))
             return{
-              attendees
+              attendees,
             }
         },
         )

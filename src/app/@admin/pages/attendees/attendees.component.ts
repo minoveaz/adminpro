@@ -33,6 +33,8 @@ export class AttendeesComponent implements OnInit {
     const EventId = this.route.snapshot.paramMap.get('id');
     this.id = EventId
     this.loadAttendees() 
+    const capacity = this.event.capacity
+    console.log(capacity)
   }
 
   loadAttendees(){

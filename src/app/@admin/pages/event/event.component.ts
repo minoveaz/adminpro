@@ -52,9 +52,23 @@ export class EventComponent implements OnInit {
           capacity: new FormControl(this.event.capacity,[Validators.required]),
           eventType: new FormControl(this.event.eventType,[Validators.required]),
           date: new FormControl(newDate,[Validators.required]),
+          _id: new FormControl(this.event._id),
+          open:new FormControl(this.event.open)
         })
       })
       
+  }
+
+  updateEvent(){
+    const updatedEvent: Event = this.updateEventForm.value
+    console.log(updatedEvent)
+    this.eventsService.updateEvent(updatedEvent)
+      .subscribe( resp => {
+        Swal.fire({title:'Event Updated', text:'Information updated correctly', icon:'success', timer: 2500});
+        this.loadEvent();
+      }, (err) => {
+        Swal.fire({title:'Could not updated data', text:err.error.msg, icon:'error', timer: 2500})
+      })
   }
 
 
